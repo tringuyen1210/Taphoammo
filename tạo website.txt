@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taphoammo Clone</title>
+    <meta name="description" content="Mua bán tài khoản TikTok an toàn và tiện lợi với Taphoammo Clone. Hỗ trợ nhiều phương thức thanh toán như Momo, VNPay, PayPal.">
+    <meta name="keywords" content="mua bán tài khoản TikTok, tài khoản TikTok giá rẻ, TikTok followers">
+    <meta name="author" content="Taphoammo Clone">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Taphoammo Clone",
+            "url": "https://taphoammo-clone.com",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://taphoammo-clone.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        header { background: #222; color: #fff; padding: 15px; text-align: center; position: relative; }
+        nav { background: #333; padding: 10px; text-align: center; }
+        nav a { color: #fff; margin: 0 15px; text-decoration: none; }
+        .cart-icon { position: absolute; top: 15px; right: 20px; background: #ff9800; color: #fff; padding: 5px 10px; border-radius: 50%; cursor: pointer; }
+        .container { padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; }
+        .product { background: #fff; padding: 15px; margin: 10px; border-radius: 5px; width: 300px; text-align: center; position: relative; }
+        .product h2 { margin: 0; }
+        .product img { width: 100%; height: auto; display: block; cursor: pointer; }
+        .rating { color: #FFD700; font-size: 18px; }
+        button { background: #28a745; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 5px; }
+        button:hover { background: #218838; }
+        .cart-container { text-align: center; padding: 20px; }
+        .cart-list { background: #fff; padding: 10px; border-radius: 5px; max-width: 400px; margin: auto; }
+        .cart-item { display: flex; justify-content: space-between; padding: 5px; }
+        .review-container { text-align: center; padding: 20px; }
+        .review-list { background: #fff; padding: 10px; border-radius: 5px; max-width: 400px; margin: auto; }
+        .review-item { border-bottom: 1px solid #ddd; padding: 5px; }
+        .policy-container { text-align: center; padding: 20px; background: #fff; margin: 20px auto; border-radius: 5px; max-width: 600px; }
+        .popup, .loader { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #000; color: #fff; padding: 10px 20px; border-radius: 5px; }
+        .loader { background: rgba(0, 0, 0, 0.8); padding: 20px; }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Taphoammo Clone - Mua Bán Tài Khoản TikTok</h1>
+        <div class="cart-icon">🛒 <span id="cart-count">0</span></div>
+    </header>
+    <nav>
+        <a href="/">Trang chủ</a>
+        <a href="/products">Sản phẩm</a>
+        <a href="/login">Đăng nhập</a>
+        <a href="/cart">Giỏ hàng</a>
+        <a href="/seller">Bán hàng</a>
+        <a href="/contact">Liên hệ</a>
+    </nav>
+    <div class="review-container">
+        <h2>Đánh giá sản phẩm</h2>
+        <input type="text" id="review-text" placeholder="Nhập đánh giá của bạn">
+        <input type="number" id="review-rating" placeholder="Chấm điểm (1-5)" min="1" max="5">
+        <button onclick="submitReview()">Gửi đánh giá</button>
+        <div class="review-list" id="review-list"></div>
+        <h3>Đánh giá trung bình: <span id="average-rating">0</span>/5</h3>
+    </div>
+    <div class="popup" id="cart-popup">Đã thêm vào giỏ hàng!</div>
+    <div class="loader" id="loading">Đang xử lý...</div>
+    <script>
+        function submitReview() {
+            document.getElementById("loading").style.display = "block";
+            setTimeout(() => {
+                let reviewText = document.getElementById("review-text").value;
+                let reviewRating = parseInt(document.getElementById("review-rating").value);
+                if (!reviewText || !reviewRating) {
+                    alert("Vui lòng nhập đánh giá và chấm điểm!");
+                    document.getElementById("loading").style.display = "none";
+                    return;
+                }
+                let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+                reviews.push({ text: reviewText, rating: reviewRating });
+                localStorage.setItem("reviews", JSON.stringify(reviews));
+                document.getElementById("review-text").value = "";
+                document.getElementById("review-rating").value = "";
+                renderReviews();
+                document.getElementById("loading").style.display = "none";
+            }, 1000);
+        }
+        function showPopup() {
+            let popup = document.getElementById("cart-popup");
+            popup.style.display = "block";
+            setTimeout(() => popup.style.display = "none", 2000);
+        }
+        function addToCart() {
+            document.getElementById("loading").style.display = "block";
+            setTimeout(() => {
+                let cartCount = document.getElementById("cart-count");
+                cartCount.textContent = parseInt(cartCount.textContent) + 1;
+                showPopup();
+                document.getElementById("loading").style.display = "none";
+            }, 1000);
+        }
+        document.addEventListener("DOMContentLoaded", renderReviews);
+    </script>
+</body>
+</html>
